@@ -1,13 +1,31 @@
-
 input.mainactivity{
-	width: 20em;
+    width: 20em;
 }
 
 input.subactivity{
-	margin-left: 5em;
-	width: 15em;
+    margin-left: 5em;
+    width: 15em;
 }
 
 .addbutton{
-	margin-left: 17em;
+    margin-left: 17em;
+}
+
+p{
+	margin: 0px;
+	padding: 0px;
+	outline: 0px;
+}
+
+div{
+	margin: 0px;
+	padding: 0px;
+	outline: 0px;
+}
+
+p.sub{
+	padding-left: 2em;
+	margin: 0px;
+	outline: 0px;
+	color: red;
 }
