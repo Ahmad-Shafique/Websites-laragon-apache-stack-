@@ -2,7 +2,7 @@
 
 
 
-<script src="todoScripts.js"></script>	
+<script type="text/javascript" src="todoScripts.js"></script>	
 	
 <html>
 	<head>
@@ -10,24 +10,30 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" href="w3.css">
+		<link rel="stylesheet" href="todocss.css">
 	</head>
 	
 	<body>
-	<div onmousehover="chgtxt()">
-		<p >Main Activity <br>
-			<h1>
-			Header tag here<br>
+		<div class="todomainpagediv">
+			<p>Enter you desired username</p>  <br>
+			<form action="dashboard.html" id="newUserName">
+				<input type="text" id="newusername"><p id="newusernamemessage"></p><br><input type="button" value="Create" onclick="newUsernameAjaxValidator()">
+			</form>
+			<br>
+			<br>
+			<p>Already have an account ? </p>
 			
-			</h1>
-		</p>
+			<form action="dashboard.html" id="oldUserName">
+				<p>Enter username here</p>
+				<input type="text" id="oldusername">
+				<p id="oldusernamemessage"></p>
+				<br><input type="button" value="Confirm" onclick="oldUsernameAjaxValidator()">
+		</form>
 		</div>
-		<p>		Sub activity 1	 </p> <br>
-		<p>		Sub activity 2	 </p> <br>
-		<p>		Sub activity 3	 </p> <br>
 		
-
-		<button onclick="tickfn()" type="button" width="150px" height="50px">Tick main activity</button>
-		<a href="test.php">Test JS functions</a>
+		<br><br><br><a href="test.php">Test JS functions</a> 
+		<br><br><br><a href="dashboard.html">Dashboard</a>
+		<br><br><br><a href="testDB.php">Database Tester</a>
 	</body>
 	
 

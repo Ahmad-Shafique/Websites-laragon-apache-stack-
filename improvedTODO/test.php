@@ -19,7 +19,7 @@
     
     <body>
         <div name="add_activity" > 
-            <input type="text" name="mainactivity" class="mainactivity"><br>
+            <input type="text" name="mainactivity" class="mainactivity" ><br>
             <input type="text" name="subactivity1" class="subactivity"><br>
             <input type="text" name="subactivity2" class="subactivity"><br>
             <input type="text" name="subactivity3" class="subactivity"><br>
@@ -28,6 +28,10 @@
 
             <br><br><br><br>
             
+		<div id="sample" > 
+			
+        </div>
+		
         <div id="activities">
             
         </div>
