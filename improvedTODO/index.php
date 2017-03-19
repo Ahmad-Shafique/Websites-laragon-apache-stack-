@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 
+<?php
+	session_start();
+?>
 
 
 <script type="text/javascript" src="todoScripts.js"></script>	
@@ -16,19 +19,19 @@
 	<body>
 		<div class="todomainpagediv">
 			<p>Enter you desired username</p>  <br>
-			<form action="dashboard.html" id="newUserName">
-				<input type="text" id="newusername"><p id="newusernamemessage"></p><br><input type="button" value="Create" onclick="newUsernameAjaxValidator()">
+			<form action="dashboard.php" id="newUserName">
+				<input type="text" name="newusername" id="newusername"><p id="newusernamemessage"></p><br><input type="button" value="Create" onclick="newUsernameAjaxValidator()">
 			</form>
 			<br>
 			<br>
 			<p>Already have an account ? </p>
 			
-			<form action="dashboard.html" id="oldUserName">
+			<form action="dashboard.php" id="oldUserName" method="POST">
 				<p>Enter username here</p>
-				<input type="text" id="oldusername">
+				<input type="text" name="oldusername" id="oldusername">
 				<p id="oldusernamemessage"></p>
 				<br><input type="button" value="Confirm" onclick="oldUsernameAjaxValidator()">
-		</form>
+			</form>
 		</div>
 		
 		<br><br><br><a href="test.php">Test JS functions</a> 

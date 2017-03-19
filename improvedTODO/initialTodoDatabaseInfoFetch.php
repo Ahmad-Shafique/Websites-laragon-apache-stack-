@@ -1,4 +1,7 @@
 <?php
+			
+			
+			
 			$servername = "localhost";
 			$username = "root";
 			$password = "";
@@ -8,7 +11,7 @@
 			try {
 				$conn = new PDO("mysql:host=$servername;port=$port;dbname=$dbn", $username );
 				$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-				$sql =  'show tables like \'users\'';
+				$sql =  'show tables like \'todo\'';
 				$row = $conn->query($sql);
 				
 				$flag=false;
@@ -18,21 +21,28 @@
 				}
 				
 				if($flag) {
-					$sql = 'select * from todo where username=\'' . $_POST['username'] . '\' and date = CURDATE()';
+					$str="Empty : " . htmlspecialchars($_POST['username']) . '::::';
+					$sql = 'select todo from todo where username=\'' . htmlspecialchars($_POST['username']) . '\' and date=CURDATE()';
+					//$sql = 'select todo from todo where username=\'Nawaz\' and date=CURDATE()';
 					$exist = $conn->query($sql);
 					$flag2=false;
+					
 					foreach ($exist as $rw){
 						//echo $rw['Tables_in_localdb (users)'];
-						if($rw['todo'] != null) $flag2=true;
+						//if($rw['todo'] != null) {$flag2=true; $str =$rw['todo']; }
+						if($rw['todo'] != null) {$flag2=true; $str =$rw['todo']; }
+						
 					}
+					
 					if($flag2){
-						$str = "";
-						foreach ($exist as $rw){
-							$str = $str . $rw['todo'];
-						}
+						//$str .= "Entered if condition. Meaning found existing string...";
+
 						echo $str;
 					}
 					else{
+						
+						//echo "table found but string doesn't exist";
+						//echo $str.="table found but string doesn't exist"
 						echo 0;
 					}
 				}
@@ -41,6 +51,7 @@
 
 					//echo "Table created";
 					$conn->query($sql);
+					//echo "Table created";
 					echo 0;
 				}
 				

@@ -4,7 +4,7 @@ input.mainactivity{
 }
 
 input.subactivity{
-	padding-left: 5em;
+	padding-left: 0;
     margin-left: 5em;
     width: 15em;
 }
@@ -56,3 +56,12 @@ p.subactivity{
 	outline: 0px;
 	color: red;	
 }
+
+p.username{
+	display: none;
+}
+
+.done{
+	text-decoration: line-through;
+}
+
