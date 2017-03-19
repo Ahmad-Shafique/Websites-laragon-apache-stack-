@@ -372,49 +372,114 @@
 				var mstr="",sstr="",ml=str.length;
 				var objlist = {list:[]};
 				
+				//var testRunCase = 0;
+				
+				console.log("Main loop length = "+ml);
 				//Loop though comlex DOM elemets , create JS objects from them
 				for(var j=0 ; j<ml ; j++){
-					
-					var obj={mainactivity:"",subactivity:[]};
-					var patt1 = /<h3.*h3>/g;
-					var patt2 = /<p>[+=a-z0-9A-Z -]*<\/p>/gm;
-					var mresult = str[j].innerHTML.match(patt1);
-					var sresult = str[j].innerHTML.match(patt2);
-					
+					var obj = {mainactivity : null,subactivity : []};
+					var mainCounter = false;
 					//Add the mainactivity part of the objects ==== Loop unnecessary as there is only one mainactivity
-					for(var i=0 ; i<mresult.length ; i++){
-						var regpatinner = />.*</g;
-						var intermediary = mresult[i].match(regpatinner);
-						var il = intermediary.length;
-						var fin = intermediary[0].replace(/>?<?/g, '');
-						obj.mainactivity = fin;
-					}
+					var h3 = str[j].innerHTML.match(/<h3[clas="done' ]*>[a-z0-9A-Z -+=]*<\/h3>/gm)[0];
+					if(h3.match(/<h3[clas="done' ]+>/)) mainCounter=true;
+					var tex = h3.replace(/<h3[clas=done" '\/]*>/,'');
+					tex.replace(/<\/h3>/,'');
+					var mac = {done : false , string : tex};
+					if(mainCounter)mac.done=true;
+					obj.mainactivity = mac;
 					
 					
 					
 					//Loop through and add the subactivity parts of the object
-					let sl = sresult.length ;
+					let subacts = str[j].innerHTML.match(/<p[clas="done' ]*>[a-zA-Z0-9 -=+_]*<\/p>/gm);
+					let sl = subacts.length ;
 					for(var i=0; i<sl; i++){
-						var regpatinner = />.*</;
-						var intermediary = sresult[i].match(regpatinner);
-						var fin = intermediary[0].replace(/>?<?/g, '');;
-						if(fin!=""){
-							//console.log(fin);
-							//console.log("Subactivity: "+fin);
-							obj.subactivity[i] =fin;
-							fin="";
+						//console.log("loop counter = " + i);
+						if(mainCounter){
+							//console.log("mainCounter = true");
+							var tex = subacts[i].replace(/<p[clas=done" '\/]*>/,'');
+							tex.replace(/<\/p>/,'');
+							var subac = {done : true , string : tex};
+						}else{
+							//console.log("mainCounter = false");
+							var subac = {done : false , string : null};
+							if(subacts[i].match(/<p[clas=done" '\/]*>/)){
+								subac.done = true;
+							}
+							var tex = subacts[i].replace(/<p[clas=done" '\/]*>/,'');
+							tex.replace(/<\/p>/,'');
+							subac.string = tex;
 						}
-						
+						obj.subactivity[i]  = subac;
 					}
 					
 					//Object ready , add to object list
+					//console.log(JSON.stringify(obj));
 					objlist.list[j]=obj;
+					mainCounter = false;
+					//testRunCase++;
 				}
-				
+				//console.log("Loop ran " + testRunCase + " times");
 				//Object list ready... now jsonify the list
 				var otpt = JSON.stringify(objlist);
-				return otpt;
+				//console.log(otpt);
+				return otpt
 			}
+			
+			
+			
+			function testInitialListCreator(){
+			//console.log("Executing List creator function");
+			var xmlhttp;
+			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+				xmlhttp=new XMLHttpRequest();
+			}
+			else {// code for IE6, IE5
+				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			//console.log("xml request created");
+			xmlhttp.onreadystatechange=function() {
+				//console.log("ready state changed");
+				if (xmlhttp.readyState==4) {
+					if (xmlhttp.responseText != 0) {
+						//Successfully fetched todo string !!! Got a JSON string as reply instead of a 0 . Now decompose and display
+						
+						var objlist = JSON.parse(xmlhttp.responseText);
+						var obj;
+						var placementNode = document.getElementById('currentActivities');
+						for(obj of objlist.list){
+							var div = document.createElement('div');
+							div.setAttribute("class","activity");
+							var h3 = document.createElement('h3');
+							h3.appendChild(document.createTextNode(obj.mainactivity.string));
+							if(obj.mainactivity.done) h3.setAttribute('class','done');
+							else h3.addEventListener('click',mainActivityClickEvent);
+							div.appendChild(h3);
+							let subac;
+							for(subac of obj.subactivity){
+								var p = document.createElement('p');
+								p.appendChild(document.createTextNode(subac.string));
+								if(subac.done) p.setAttribute('class','done');
+								else p.addEventListener('click',subActivityClickEvent);
+								div.appendChild(p);
+							}
+							placementNode.appendChild(div);
+						}
+						
+						//document.getElementById('errormssg').innerHTML = xmlhttp.responseText;
+						
+					}
+					else {
+						//No todo list found . Do Nothing !!!
+					}
+				}
+			}
+			xmlhttp.open("POST","initialTodoDatabaseInfoFetch.php",true);
+			//console.log("POST method set");
+			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+			//Retrieve the username and send
+			xmlhttp.send("username=" + document.getElementById('username').innerHTML);
+		}
 		
 		
 		
@@ -695,54 +760,66 @@
 		*/
 			function createJsonStringOfObjectList(){
 				
-				//Fetch all complext activities into an array
+				//Fetch all complex activities into an array
 				var str = document.getElementsByClassName('activity');
 				
 				//Declare necessary variables
 				var mstr="",sstr="",ml=str.length;
 				var objlist = {list:[]};
 				
+				//var testRunCase = 0;
+				
+				console.log("Main loop length = "+ml);
 				//Loop though comlex DOM elemets , create JS objects from them
 				for(var j=0 ; j<ml ; j++){
-					var obj={mainactivity:"",subactivity:[]};
-					var patt1 = /<h3.*h3>/g;
-					var patt2 = /<p>[+=a-z0-9A-Z -]*<\/p>/gm;
-					var mresult = str[j].innerHTML.match(patt1);
-					var sresult = str[j].innerHTML.match(patt2);
-					
+					var obj = {mainactivity : null,subactivity : []};
+					var mainCounter = false;
 					//Add the mainactivity part of the objects ==== Loop unnecessary as there is only one mainactivity
-					for(var i=0 ; i<mresult.length ; i++){
-						var regpatinner = />.*</g;
-						var intermediary = mresult[i].match(regpatinner);
-						var il = intermediary.length;
-						var fin = intermediary[0].replace(/>?<?/g, '');
-						obj.mainactivity = fin;
-					}
+					var h3 = str[j].innerHTML.match(/<h3[clas="done' ]*>[a-z0-9A-Z -+=]*<\/h3>/gm)[0];
+					if(h3.match(/<h3[clas="done' ]+>/)) mainCounter=true;
+					var tex = h3.replace(/<h3[clas=done" '\/]*>/,'');
+					tex = tex.replace(/<\/h3>/,'');
+					var mac = {done : false , string : tex};
+					if(mainCounter)mac.done=true;
+					obj.mainactivity = mac;
 					
 					
 					
 					//Loop through and add the subactivity parts of the object
-					let sl = sresult.length ;
+					let subacts = str[j].innerHTML.match(/<p[clas="done' ]*>[a-zA-Z0-9 -=+_]*<\/p>/gm);
+					let sl = subacts.length ;
 					for(var i=0; i<sl; i++){
-						var regpatinner = />.*</;
-						var intermediary = sresult[i].match(regpatinner);
-						var fin = intermediary[0].replace(/>?<?/g, '');;
-						if(fin!=""){
-							//console.log(fin);
-							//console.log("Subactivity: "+fin);
-							obj.subactivity[i] =fin;
-							fin="";
+						//console.log("loop counter = " + i);
+						if(mainCounter){
+							//console.log("mainCounter = true");
+							var tex = subacts[i].replace(/<p[clas=done" '\/]*>/,'');
+							tex = tex.replace(/<\/p>/,'');
+							var subac = {done : true , string : tex};
 						}
-						
+						else{
+							//console.log("mainCounter = false");
+							var subac = {done : false , string : null};
+							if(subacts[i].match(/<p[clas=done" '\/]+>/)){
+								subac.done = true;
+							}
+							var tex = subacts[i].replace(/<p[clas=done" '\/]*>/,'');
+							tex = tex.replace(/<\/p>/,'');
+							subac.string = tex;
+						}
+						obj.subactivity[i]  = subac;
 					}
 					
 					//Object ready , add to object list
+					//console.log(JSON.stringify(obj));
 					objlist.list[j]=obj;
+					mainCounter = false;
+					//testRunCase++;
 				}
-				
+				//console.log("Loop ran " + testRunCase + " times");
 				//Object list ready... now jsonify the list
 				var otpt = JSON.stringify(objlist);
-				return otpt;
+				//console.log(otpt);
+				return otpt
 			}
 		/*
 			Function to make a JSON string of object list from all DOM div "activity" elements ends here
@@ -783,8 +860,8 @@
 		*/
 			function updateDatabaseJsonStringAsynchronously(){
 				var jsonData = createJsonStringOfObjectList();
-
-				console.log("Executing test ajax function");
+				//console.log("Json String is : "+jsonData);
+				//console.log("Executing test ajax function");
 				var xmlhttp;
 				if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
 					xmlhttp=new XMLHttpRequest();
@@ -792,14 +869,15 @@
 				else {// code for IE6, IE5
 					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 				}
-				console.log("xml request created");
+				//console.log("xml request created");
 				xmlhttp.onreadystatechange=function() {
-					console.log("ready state changed");
+					//console.log("ready state changed");
 					if (xmlhttp.readyState==4) {
-						console.log("Received reply : "+xmlhttp.responseText);
+						//console.log("Received reply : "+xmlhttp.responseText);
 						
 						if (xmlhttp.responseText == 1) {
 							//Success condition
+							
 						}
 						else {
 							//console.log("Failed to update DB");
@@ -811,10 +889,10 @@
 				xmlhttp.open("POST","asynchronousDatabaseJsonDataUpdater.php",true);
 				//console.log("POST method set");
 				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-				console.log("request header set");
+				//console.log("request header set");
 				var params = {username : document.getElementById('username').innerHTML, todo : createJsonStringOfObjectList()};
 				xmlhttp.send(formatParams(params));
-				console.log("request sent");
+				//console.log("request sent");
 			}
 		/*
 			AJAX Function to asynchronously update the database json string ends here
@@ -829,6 +907,7 @@
 		*/
 			function subActivityClickEvent(){
 				this.setAttribute('class','done');
+				updateDatabaseJsonStringAsynchronously();
 			}
 		/*
 			Function to handle click event on subactivity ends here
@@ -848,6 +927,7 @@
 				for(var i=0 ; i<len ; i++){
 					chld[i].setAttribute('class','done');
 				}
+				updateDatabaseJsonStringAsynchronously();
 			}
 		/*
 			Function to handle click event on mainactivity ends here
@@ -872,10 +952,6 @@
 				h3.appendChild(document.createTextNode(document.getElementsByClassName('mainactivity')[0].value));
 				div.appendChild(h3);
 				//console.log('Appended main activity to newly created node');
-				var tickbox = document.createElement('input');
-				tickbox.setAttribute('type','checkbox');
-				//tickbox.setAttribute('class','custom');
-				div.appendChild(tickbox);
 				let subac = document.getElementsByClassName('subactivity');
 				let ln = subac.length;
 				for(let i=0; i<ln ; i++){

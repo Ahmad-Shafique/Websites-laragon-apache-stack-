@@ -24,7 +24,7 @@
 				
 				
 				
-				<input type="button" onclick="testGetDataFromActivityDiv()" value="Print in console">
+				<input type="button" onclick="testCreateJsonStringOfObjectList()" value="Print in console">
 				
 				
 				<script></script>
@@ -32,7 +32,7 @@
 			</div>
 			
 			<script>
-				initialListCreator();
+				testInitialListCreator();
 			</script>
 			
 			<div class="w3-container w3-half w3-light-grey">

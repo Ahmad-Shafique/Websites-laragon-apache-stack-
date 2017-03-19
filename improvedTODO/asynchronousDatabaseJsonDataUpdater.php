@@ -22,8 +22,17 @@
 				
 				if($flag) {
 					// htmlspecialchars($_POST['username']) 
-					$sql = 'INSERT INTO todo VALUES(\''. htmlspecialchars($_POST['username']) .'\' , CURDATE() , \'' . 
-							htmlspecialchars($_POST['todo']) . '\' ) ON DUPLICATE KEY UPDATE todo = \'' . htmlspecialchars($_POST['todo']) . '\'';
+					/*
+					$sql = sprintf('INSERT INTO todo VALUES(\'%s\' , CURDATE() , \'%s\' ) ON DUPLICATE KEY UPDATE todo = \'%s\'' ,
+							mysql_real_escape_string(htmlspecialchars($_POST['username'])),
+							mysql_real_escape_string(htmlspecialchars($_POST['todo'])),
+							mysql_real_escape_string(htmlspecialchars($_POST['todo']))
+							);
+					*/
+					/*$sql = 'INSERT INTO todo VALUES(\''. htmlspecialchars($_POST['username']) .'\' , CURDATE() , \'' . 
+							htmlspecialchars($_POST['todo']) . '\' ) ON DUPLICATE KEY UPDATE todo = \'' . htmlspecialchars($_POST['todo']) . '\'';*/
+					$sql = 'INSERT INTO todo VALUES(\''. $_POST['username'] .'\' , CURDATE() , \'' . 
+							$_POST['todo'] . '\' ) ON DUPLICATE KEY UPDATE todo = \'' . $_POST['todo'] . '\'';
 					$exist = $conn->query($sql);
 					echo $sql;
 
