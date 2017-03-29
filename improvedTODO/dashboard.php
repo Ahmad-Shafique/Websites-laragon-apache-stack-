@@ -16,15 +16,14 @@
 	
 	<body>
 	
-		<p id="username" class="username"><?php if(isset($_POST['oldusername'])) echo htmlspecialchars($_POST['oldusername']); ?></p>
+		<p id="username" class="username"><?php 
+		if(isset($_POST['oldusername'])) echo htmlspecialchars($_POST['oldusername']);
+		else  echo htmlspecialchars($_POST['newusername']);
+		?></p>
 		<p id="errormssg"> </p>
 		
 		<div class="w3-row w3-border">
-			<div class="w3-container w3-half w3-light-blue" id="currentActivities">
-				
-				
-				
-				<input type="button" onclick="testCreateJsonStringOfObjectList()" value="Print in console">
+			<div class="w3-container w3-half w3-light-blue" id="currentActivities"">
 				
 				
 				<script></script>
@@ -32,7 +31,7 @@
 			</div>
 			
 			<script>
-				testInitialListCreator();
+				initialListCreator();
 			</script>
 			
 			<div class="w3-container w3-half w3-light-grey">

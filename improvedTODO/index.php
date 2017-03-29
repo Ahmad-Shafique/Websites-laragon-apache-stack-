@@ -17,9 +17,9 @@
 	</head>
 	
 	<body>
-		<div class="todomainpagediv">
+		<div class="w3-row w3-border w3-display-middle">
 			<p>Enter you desired username</p>  <br>
-			<form action="dashboard.php" id="newUserName">
+			<form action="dashboard.php" id="newUserName" method="POST">
 				<input type="text" name="newusername" id="newusername"><p id="newusernamemessage"></p><br><input type="button" value="Create" onclick="newUsernameAjaxValidator()">
 			</form>
 			<br>
@@ -34,9 +34,6 @@
 			</form>
 		</div>
 		
-		<br><br><br><a href="test.php">Test JS functions</a> 
-		<br><br><br><a href="dashboard.html">Dashboard</a>
-		<br><br><br><a href="testDB.php">Database Tester</a>
 	</body>
 	
 

@@ -429,56 +429,56 @@
 			
 			
 			function testInitialListCreator(){
-			//console.log("Executing List creator function");
-			var xmlhttp;
-			if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-				xmlhttp=new XMLHttpRequest();
-			}
-			else {// code for IE6, IE5
-				xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			//console.log("xml request created");
-			xmlhttp.onreadystatechange=function() {
-				//console.log("ready state changed");
-				if (xmlhttp.readyState==4) {
-					if (xmlhttp.responseText != 0) {
-						//Successfully fetched todo string !!! Got a JSON string as reply instead of a 0 . Now decompose and display
-						
-						var objlist = JSON.parse(xmlhttp.responseText);
-						var obj;
-						var placementNode = document.getElementById('currentActivities');
-						for(obj of objlist.list){
-							var div = document.createElement('div');
-							div.setAttribute("class","activity");
-							var h3 = document.createElement('h3');
-							h3.appendChild(document.createTextNode(obj.mainactivity.string));
-							if(obj.mainactivity.done) h3.setAttribute('class','done');
-							else h3.addEventListener('click',mainActivityClickEvent);
-							div.appendChild(h3);
-							let subac;
-							for(subac of obj.subactivity){
-								var p = document.createElement('p');
-								p.appendChild(document.createTextNode(subac.string));
-								if(subac.done) p.setAttribute('class','done');
-								else p.addEventListener('click',subActivityClickEvent);
-								div.appendChild(p);
+				//console.log("Executing List creator function");
+				var xmlhttp;
+				if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+					xmlhttp=new XMLHttpRequest();
+				}
+				else {// code for IE6, IE5
+					xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+				}
+				//console.log("xml request created");
+				xmlhttp.onreadystatechange=function() {
+					//console.log("ready state changed");
+					if (xmlhttp.readyState==4) {
+						if (xmlhttp.responseText != 0) {
+							//Successfully fetched todo string !!! Got a JSON string as reply instead of a 0 . Now decompose and display
+							
+							var objlist = JSON.parse(xmlhttp.responseText);
+							var obj;
+							var placementNode = document.getElementById('currentActivities');
+							for(obj of objlist.list){
+								var div = document.createElement('div');
+								div.setAttribute("class","activity");
+								var h3 = document.createElement('h3');
+								h3.appendChild(document.createTextNode(obj.mainactivity.string));
+								if(obj.mainactivity.done) h3.setAttribute('class','done');
+								else h3.addEventListener('click',mainActivityClickEvent);
+								div.appendChild(h3);
+								let subac;
+								for(subac of obj.subactivity){
+									var p = document.createElement('p');
+									p.appendChild(document.createTextNode(subac.string));
+									if(subac.done) p.setAttribute('class','done');
+									else p.addEventListener('click',subActivityClickEvent);
+									div.appendChild(p);
+								}
+								placementNode.appendChild(div);
 							}
-							placementNode.appendChild(div);
+							
+							//document.getElementById('errormssg').innerHTML = xmlhttp.responseText;
+							
 						}
-						
-						//document.getElementById('errormssg').innerHTML = xmlhttp.responseText;
-						
-					}
-					else {
-						//No todo list found . Do Nothing !!!
+						else {
+							//No todo list found . Do Nothing !!!
+						}
 					}
 				}
-			}
-			xmlhttp.open("POST","initialTodoDatabaseInfoFetch.php",true);
-			//console.log("POST method set");
-			xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
-			//Retrieve the username and send
-			xmlhttp.send("username=" + document.getElementById('username').innerHTML);
+				xmlhttp.open("POST","initialTodoDatabaseInfoFetch.php",true);
+				//console.log("POST method set");
+				xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+				//Retrieve the username and send
+				xmlhttp.send("username=" + document.getElementById('username').innerHTML);
 		}
 		
 		
@@ -666,17 +666,16 @@
 							var div = document.createElement('div');
 							div.setAttribute("class","activity");
 							var h3 = document.createElement('h3');
-							h3.appendChild(document.createTextNode(obj.mainactivity));
-							h3.addEventListener('click',mainActivityClickEvent);
+							h3.appendChild(document.createTextNode(obj.mainactivity.string));
+							if(obj.mainactivity.done) h3.setAttribute('class','done');
+							else h3.addEventListener('click',mainActivityClickEvent);
 							div.appendChild(h3);
-							//var tickbox = document.createElement('input');
-							//tickbox.setAttribute('type','checkbox');
-							//div.appendChild(tickbox);
 							let subac;
 							for(subac of obj.subactivity){
 								var p = document.createElement('p');
-								p.appendChild(document.createTextNode(subac));
-								p.addEventListener('click',subActivityClickEvent);
+								p.appendChild(document.createTextNode(subac.string));
+								if(subac.done) p.setAttribute('class','done');
+								else p.addEventListener('click',subActivityClickEvent);
 								div.appendChild(p);
 							}
 							placementNode.appendChild(div);
