@@ -23,7 +23,7 @@
 					</tr>
 					<tr>
 						<td>Stars : </td>
-						<td><input type="number" name="star" value="<?php 
+						<td><input type="number" name="stars" value="<?php 
 																	if(isset($_SESSION['star']))
 																		echo $_SESSION['star']?>">
 						</td>
@@ -50,6 +50,9 @@
 			if(isset($_SESSION['updated'])){
 				echo $_SESSION['updated'];
 				unset($_SESSION['updated']);
+			}
+			if(isset($_SESSION['query'])){
+				echo "<br>".$_SESSION['query'];
 			}
 		?>
 	</body>

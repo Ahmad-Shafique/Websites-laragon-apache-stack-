@@ -37,7 +37,7 @@ $result= $mysqli->query("SELECT * FROM hotels ORDER BY id ASC");
 					echo "<tr>";
 					echo "<td align='center'>".$res->hotelName."</td>";
 					echo "<td align='center'>".$res->id."</td>";
-					echo "<td align='center'> <a href=\"deleteValue.php?id=$res->id\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
+					echo "<td align='center'> <a href=\"deleteValue.php?id=".$res->id."\" onClick=\"return confirm('Are you sure you want to delete?')\">Delete</a></td>";		
 					echo "</tr>";
 				}
 				?>

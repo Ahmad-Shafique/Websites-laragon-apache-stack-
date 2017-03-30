@@ -949,6 +949,10 @@
 				div.setAttribute("class","activity");
 				var h3 = document.createElement('h3');
 				h3.appendChild(document.createTextNode(document.getElementsByClassName('mainactivity')[0].value));
+				document.getElementsByClassName('mainactivity')[0].value = '';
+				//console.log("Before adding click event");
+				h3.addEventListener('click',mainActivityClickEvent);
+				//console.log("After adding click event");
 				div.appendChild(h3);
 				//console.log('Appended main activity to newly created node');
 				let subac = document.getElementsByClassName('subactivity');
@@ -957,6 +961,7 @@
 					var p = document.createElement('p');
 					//p.setAttribute('class','done');
 					p.appendChild(document.createTextNode(subac[i].value));
+					subac[i].value='';
 					p.addEventListener('click',subActivityClickEvent);
 					div.appendChild(p);
 				}

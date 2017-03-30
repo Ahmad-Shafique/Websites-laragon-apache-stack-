@@ -10,11 +10,11 @@ $address = $_POST['address'];
 $facilities = $_POST['facilities'];
 
 
-	$str = "delete from hotels where id=".$_POST['id'];
+	$str = "delete from hotels where id=".$_GET['id'];
 
 	
 	$_SESSION['query']= $str;
-	$_SESSION['deleted'] = "Deleted " .$hotelName. " Information";
+	$_SESSION['deleted'] = "Deleted " .$hotelName. " Information where id is : ".$_GET['id'];
 	$mysqli->query($str);
 	
 	header("location:adminDelete.php");
