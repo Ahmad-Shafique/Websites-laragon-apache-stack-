@@ -1,0 +1,36 @@
+<html>
+	<head>
+		<title>Improved TODO </title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+	</head>
+	
+		<script type="text/javascript" src="sha512.js"></script>
+		
+	<body>
+		<input type="text" id="main" placeholder="value to be hashed">
+		<br><input type="button" onclick="outputValue()" value="Hash !!">
+		<br><p id="hash"></p>
+		<br>
+		<br>
+		<br>
+		<input type="text" id="second" placeholder="value to be hashed and compared">
+		<br><input type="button" onclick="compare()" value="Compare Hash">
+		<br><p id="compare"></p>
+	</body>
+
+</html>
+
+<script>
+	function outputValue(){
+		document.getElementById('hash').innerHTML = Sha512.hash(document.getElementById('main').value);
+	}
+	
+	function compare(){
+		var val = Sha512.hash(document.getElementById('second').value);
+		if(val == document.getElementById('hash').innerHTML){
+			document.getElementById('compare').innerHTML="Equal !!!";
+		}
+		else document.getElementById('compare').innerHTML = "NOT EQUAL !!!";
+	}
+</script>

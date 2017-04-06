@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+
+<html>
+	<head>
+		<script type='text/javascript' src='test.js'></script>
+	</head>
+	<body>
+		<form id='form' action='somewhere.php' method='POST'>
+			First Name : <input id='fname' type='text' placeholder='Ahmad Muhammad' onBlur='fn();' /><p id='fne'></p><br>
+			Last Name : <input id='lname' type='text' placeholder='Shafique' onBlur='ln()'/><p id='lne'></p><br>
+			Email : <input id='email' type='text' placeholder='Email' onBlur='em()'/><p id='ee'></p><br>
+			Password : <input id='pass' type='password' placeholder='Password' onBlur='pas()'/><p id='pe'></p><br>
+			Confirm Password : <input id='repass' type='password' placeholder='Confirm Password' onBlur='repas()'/><p id='rpe'></p><br>
+			<p style='color:red' id='errormsg'></p>
+			<input type='button' value='Submit' onclick='submitFunction()'/>
+		</form>
+	</body>
+</html>

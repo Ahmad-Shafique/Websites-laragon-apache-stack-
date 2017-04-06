@@ -1,0 +1,86 @@
+function test(){
+		//window.alert('Check button clicked');
+		//document.getElementById('p1').style.color ='#ff0000';
+		window.alert(document.getElementById('p2').value);
+	}
+	
+function fn(){
+	console.log('reached fname function');
+		if(document.getElementById('fname').value == '' || document.getElementById('fname').value == ''){
+			document.getElementById('fne').innerHTML = 'First Name is required';
+		}
+		else document.getElementById('fne').innerHTML = '';
+	}
+	
+function ln(){
+		if(document.getElementById('lname').value == '' || document.getElementById('lname').value == ''){
+			document.getElementById('lne').innerHTML = 'Last Name is required';
+		}
+		else document.getElementById('lne').innerHTML = '';
+	}
+	
+function em(){
+		if(document.getElementById('email').value == '' || document.getElementById('email').value == ''){
+			document.getElementById('ee').innerHTML = 'Email is required';
+		}
+		else if (!document.getElementById('email').value.match(/.*@.*..*/ig)){
+			document.getElementById('ee').innerHTML = 'Please input a valid email address';
+		}
+		else document.getElementById('ee').innerHTML = '';
+	}
+	
+	function pas(){
+		if(document.getElementById('pass').value == '' || document.getElementById('pass').value == ''){
+			document.getElementById('pe').innerHTML = 'Password required';
+		}
+		else if(document.getElementById('pass').value.length < 8){
+			document.getElementById('pe').innerHTML = 'Password must contain at least 8 characters';
+		}
+		else if(!document.getElementById('pass').value.match(/.*[A-Z]+.*/) || !document.getElementById('pass').value.match(/.*[0-9]+.*/)
+				|| !document.getElementById('pass').value.match(/.*[a-z]+.*/)){
+			document.getElementById('pe').innerHTML = 'Password must contain at least one lowercase ,  one uppercase letter and one digit';
+		}
+		else document.getElementById('pe').innerHTML = '';
+	}
+	
+	function repas(){
+		if(document.getElementById('repass').value == '' || document.getElementById('repass').value == ''){
+			document.getElementById('rpe').innerHTML = 'Please confirm password';
+		}
+		else if(document.getElementById('pass').value != document.getElementById('repass').value){
+			document.getElementById('rpe').innerHTML = 'Passwords do not match !!!';
+		}
+		else document.getElementById('rpe').innerHTML = '';
+	}
+	
+	function submitFunction(){
+		if(document.getElementById('fname').value == '' || document.getElementById('fname').value == ''){
+			document.getElementById('errormsg').innerHTML = 'First Name is required';
+		}
+		else if(document.getElementById('lname').value == '' || document.getElementById('lname').value == ''){
+			document.getElementById('errormsg').innerHTML = 'Last Name is required';
+		}
+		else if(document.getElementById('email').value == '' || document.getElementById('email').value == ''){
+			document.getElementById('errormsg').innerHTML = 'Email is required';
+		}
+		else if (!document.getElementById('email').value.match(/.*@.*..*/ig)){
+			document.getElementById('errormsg').innerHTML = 'Please input a valid email address';
+		}
+		else if(document.getElementById('pass').value == '' || document.getElementById('pass').value == ''){
+			document.getElementById('errormsg').innerHTML = 'Password required';
+		}
+		else if(document.getElementById('pass').value.length < 8){
+			document.getElementById('errormsg').innerHTML = 'Password must contain at least 8 characters';
+		}
+		else if(!document.getElementById('pass').value.match(/.*[A-Z]+.*/) || !document.getElementById('pass').value.match(/.*[0-9]+.*/)
+				|| !document.getElementById('pass').value.match(/.*[a-z]+.*/)){
+			document.getElementById('errormsg').innerHTML = 'Password must contain at least one lowercase ,  one uppercase letter and one digit';
+		}
+		else if(document.getElementById('repass').value == '' || document.getElementById('repass').value == ''){
+			document.getElementById('errormsg').innerHTML = 'Please confirm password';
+		}
+		else if(document.getElementById('pass').value != document.getElementById('repass').value){
+			document.getElementById('errormsg').innerHTML = 'Passwords do not match !!!';
+		}
+		else document.getElementById('form').submit();
+	}
