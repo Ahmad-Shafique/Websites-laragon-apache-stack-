@@ -3,3 +3,7 @@ button.addAmountButton{
 	height: 48px;
 	width: 48px;
 	}
+	
+button.hidden{
+	display: none;
+}
