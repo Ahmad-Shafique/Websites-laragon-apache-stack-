@@ -6,7 +6,7 @@ var communityCards = [];
 var round ;
 var cardSet = ['2','3','4','5','6','7','8','9','10','J','Q','K','A'];
 var cardTypes = ['Black Spades','Red Spades','Black Heart','Red Heart'];
-var smallBlind,bigBlind=0,potLimit,started=false,selectedPlayer=0;
+var smallBlind,bigBlind=0,potLimit,started=false,selectedPlayer=0, winnerFound = false , winnerNumber;
 
 function initialSetup(){
 	numberOfPlayers = window.prompt("Enter number of players","3");
@@ -81,7 +81,7 @@ function playerActionControl(action){
 				}
 			}
 		}else{
-			smallBlind = window.prompt('Enter Small Blind Amount','40');
+			smallBlind = window.prompt('Enter Small Blind Amount','4');
 			if(playerBet(smallBlind)){
 				changeSelectedPlayer();
 				started = true;
@@ -243,6 +243,8 @@ function increaseRound(){
 	}else if(round == 5){
 		console.log('Showdown !!!');
 		
+		console.log('round is now : '+ round);
+		
 		showDown();
 	}
 }
@@ -264,13 +266,139 @@ function dealFlop(){
 	}
 }
 
+function testFunctionArray(){
+	let functionArray = [];
+	let fn1 = function(){console.log('Executing function1');};
+	let fn2 = function(){console.log('Executing function2');};
+	let fn3 = function(){console.log('Executing function3');};
+	let fn4 = function(){console.log('Executing function4');};
+	functionArray.push(fn1);
+	functionArray.push(fn2);
+	functionArray.push(fn3);
+	functionArray.push(fn4);
+	for(let i=0 ; i<functionArray.length ; i++){
+		functionArray[i]();
+	}
+}
+
+function sortCardsArrayByName(cardsArray){
+	
+	/*
+	console.log('printing received cards array inside sort by name function' );
+		
+		for(let k =0 ; k<cardsArray.length ; k++){
+			console.log(cardsArray[k].name + ' : ' + cardsArray[k].type );
+		}
+		
+	console.log('done' );
+	*/
+	
+	//console.log('sorting by name');
+	
+	for(let i=cardsArray.length ; i>=0 ; i--){
+		for(let j=0 ; j<i-1 ; j++){
+			
+			//console.log('index number of first card in card set : ' +cardSet.indexOf(cardsArray[j].name));
+			//console.log('index number of second card in card set : ' +cardSet.indexOf(cardsArray[j+1].name));
+			
+			if(cardSet.indexOf(cardsArray[j].name) > cardSet.indexOf(cardsArray[j+1].name)){
+				let temp = cardsArray[j];
+				cardsArray[j] = cardsArray[j+1];
+				cardsArray[j+1] = temp;
+				
+				//console.log('swapped!!! ');
+				
+			}
+		}
+	}
+	
+	return cardsArray;
+}
+
+function sortCardsArrayByType(cardsArray){
+	for(let i=cardsArray.length ; i>=0 ; i--){
+		for(let j=0 ; j<i-1 ; j++){
+			//console.log('sorting by type');
+			
+			if(cardTypes.indexOf(cardsArray[j].type) > cardTypes.indexOf(cardsArray[j+1].type)){
+				let temp = cardsArray[j];
+				cardsArray[j] = cardsArray[j+1];
+				cardsArray[j+1] = temp;
+				
+				//console.log('swapped!!! ');
+				
+			}
+			
+		}
+	}
+	
+	return cardsArray;
+}
+
+function createSortedCardsArrayByName(index){
+	let cardsArray = [];
+	for(let j=0 ; j<players[index].holes.length ; j++){
+		cardsArray.push(players[index].holes[j]);
+	}
+	for(let j=0 ; j<communityCards.length ; j++){
+		cardsArray.push(communityCards[j]);
+	}
+		
+	return sortCardsArrayByName(cardsArray);
+}
+
+function createSortedCardsArrayByType(index){
+	let cardsArray = [];
+	for(let j=0 ; j<players[index].holes.length ; j++){
+		cardsArray.push(players[index].holes[j]);
+	}
+	for(let j=0 ; j<communityCards.length ; j++){
+		cardsArray.push(communityCards[j]);
+	}
+		
+	return sortCardsArrayByType(cardsArray);
+}
+
+function checkStraightFlushWinner(){
+	
+	//console.log('checking straigt flush winner');
+	
+	let flag = false;
+	
+	for(let i=0 ; i<numberOfPlayers ; i++){
+		
+		let cardsArray = createSortedCardsArrayByName(i);
+		
+		
+		
+		/*
+		console.log('sorted by type');
+		console.log('printing card set for player '+i );
+		
+		for(let k =0 ; k<cardsArray.length ; k++){
+			console.log(cardsArray[k].name + ' : ' + cardsArray[k].type );
+		}
+		
+		console.log('done' );
+		*/
+		
+		
+	}
+}
+
+function winnerFound(){
+	
+}
+
+
 function preFlop(){
 	//console.log('Entered pre-Flop()');
 	
 	dealHolesToPlayers();
 	deployPlayers();
 	
-	//console.log('Finished pre-Flop()')
+	//console.log('Finished pre-Flop()');
+	//testFunctionArray();
 }
 
 function flop(){
@@ -288,4 +416,7 @@ function river(){
 
 function showDown(){
 	
+	console.log('Entered showdown function');
+	
+	checkStraightFlushWinner();
 }

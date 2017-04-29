@@ -1,0 +1,25 @@
+.container{
+	margin: 0 auto;
+	top: 0;
+	left: 0;
+	overflow: auto;
+}
+
+.menu{
+	height: 5%;
+	width: 100%;
+	text-align: center;
+	background:cyan;
+}
+
+.menuItem{
+	width: 10%;
+	float: left;
+	height: 100%;
+}
+
+.activated{
+	background-color: GhostWhite;
+	font-style: bold;
+	color: Indigo;
+}

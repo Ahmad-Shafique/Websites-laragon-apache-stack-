@@ -12,6 +12,8 @@ $result= $mysqli->query("SELECT * FROM hotels ORDER BY id ASC");
 <html>
 	<head>
 		<title>Home</title>
+		<meta charset="UTF-8">
+		<script src='assignment.js' type='text/javascript'></script>
 	</head>
 	<body>
 		<br>
@@ -19,14 +21,14 @@ $result= $mysqli->query("SELECT * FROM hotels ORDER BY id ASC");
 		<br>
 		<br>
 		<br>
-		<h3 align='right'><a href='login.php'>Login</a></h3>
+		<h3 align='right'><input type='text' placeholder='Enter search details' id='searchString' /><button onclick='ajaxSearch()'>Search</button><p          /><a href='login.php'>Login</a></h3>
 		<hr>
 		<div align='center'>
 			<h2><u>Hotel Info</u></h2>
 			<br>
 			<br>
 			<br>
-			<table border="2px" width = "80%">
+			<table border="2px" width = "80%" id='table'>
 				<tr>
 					<th>S.No.</th>
 					<th>Hotel Name</th>

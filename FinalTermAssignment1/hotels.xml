@@ -1,0 +1,53 @@
+<hotels>
+	<hotel>
+		<id>1</id>
+		<name>Ocean Paradise</name>
+		<stars>5</stars>
+		<facilities>
+			<facilityName>Internet</facilityName>
+			<facilityName>Gym</facilityName>
+			<facilityName>Parking</facilityName>
+			<facilityName>Restaurant</facilityName>
+			<facilityName>Pickup-Drop</facilityName>
+		</facilities>
+		<address>74 Kolatoli, beach road</address>
+		<distance>1</distance>
+		<available>True</available>
+	</hotel>
+	<hotel>
+		<id>2</id>
+		<name>Hotel Long Beach</name>
+		<stars>4</stars>
+		<facilities>
+			<facilityName>Internet</facilityName>
+			<facilityName>Gym</facilityName>
+			<facilityName>Parking</facilityName>
+			<facilityName>Restaurant</facilityName>
+		</facilities>
+		<address>4 Sugondha beach road</address>
+		<distance>2</distance>
+		<available>False</available>
+	</hotel>
+	<hotel>
+		<id>3</id>
+		<name>Hotel Sayamen</name>
+		<stars>2</stars>
+		<facilities>
+			<facilityName>Restaurant</facilityName>
+		</facilities>
+		<address>23 Laboni beach road</address>
+		<distance>3</distance>
+		<available>False</available>
+	</hotel>
+	<hotel>
+		<id>4</id>
+		<name>Hotel Shoibal</name>
+		<stars>3</stars>
+		<facilities>
+			<facilityName>Parking</facilityName>
+		</facilities>
+		<address>6 Cox's bazar road</address>
+		<distance>1</distance>
+		<available>True</available>
+	</hotel>
+</hotels>
