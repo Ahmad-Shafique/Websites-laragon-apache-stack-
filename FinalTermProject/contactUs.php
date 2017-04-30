@@ -9,7 +9,7 @@
 			<h1>Contact Us</h1>
 		</div>
 		<div class="items container">
-			<form method="" action="">
+			<form method="post" action="sendMessage.php">
 				<div class="item container">
 					<div class="text sub">
 						Name:

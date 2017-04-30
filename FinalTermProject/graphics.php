@@ -3,7 +3,7 @@
 	echo'<div class="main container">';
 	include_once "menuContainer.php"; 
 	echo'<div class="top container">
-			<h1>Graphics</h1>
+			<h1>Graphics Designs Showcase</h1>
 		</div>
 		<div class="items container">';
 

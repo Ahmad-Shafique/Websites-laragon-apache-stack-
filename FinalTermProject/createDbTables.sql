@@ -38,3 +38,17 @@ type varchar(20) not null
 );
 insert into profession(title,start,end,organization,type) 
 values('Graphics Desginer','2013','2017','Bin Naji group','job');
+
+create table userpass(
+username varchar(15) not null;
+password varchar(30) not null
+);
+insert into userpass values ('1','1');
+
+create table messages(
+name varchar(30) not null,
+email varchar(100) not null,
+subject varchar(100) not null,
+message varchar(1000) not null
+);
+insert into messages values('Jane','jane@example.com','Nice website', 'Just wanted to let you know, your website is amazing!');
